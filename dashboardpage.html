@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlertMate Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        header {
+            background: #0a2540;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+            color: #0a2540;
+        }
+
+        .value {
+            font-size: 40px;
+            font-weight: bold;
+            color: #0077ff;
+        }
+
+        .btn {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #0077ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #005fcc;
+        }
+
+        input {
+            padding: 8px;
+            margin-top: 10px;
+            width: 80%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #0a2540;
+            color: white;
+        }
+
+        /* 🔒 Locked Feature Styling */
+        .locked {
+            background: #e0e0e0;
+            color: #777;
+        }
+
+        .locked .value {
+            color: #999;
+        }
+
+        .locked .btn {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        .locked:hover {
+            transform: none;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>AlertMate Dashboard</h1>
+    <p>Monitor Health & Safety in Real-Time</p>
+</header>
+
+<div class="dashboard">
+
+    <!-- Number of Falls -->
+    <div class="card">
+        <h2>No. of Falls</h2>
+        <div class="value" id="falls">0</div>
+    </div>
+
+    <!-- Medicine Alarm -->
+    <div class="card">
+        <h2>Medicine Alarm</h2>
+        <input type="time" id="alarmTime">
+        <br>
+        <button class="btn" onclick="setAlarm()">Set Alarm</button>
+        <p id="alarmStatus"></p>
+    </div>
+
+    <!-- Missed Medicines -->
+    <div class="card">
+        <h2>Missed Medicines (Month)</h2>
+        <div class="value" id="missed">0</div>
+        <button class="btn" onclick="missMedicine()">Missed</button>
+    </div>
+
+    <!-- 🔒 Heartbeat (Locked Feature) -->
+    <div class="card locked">
+        <h2>Heartbeat </h2>
+        <div class="value">-- bpm</div>
+        <p>Coming Soon (Future Device Feature)</p>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 AlertMate Dashboard</p>
+</footer>
+
+<script>
+    // Falls counter
+    let fallCount = 0;
+    function increaseFalls() {
+        fallCount++;
+        document.getElementById("falls").innerText = fallCount;
+    }
+
+    // Missed medicine counter
+    let missedCount = 0;
+    function missMedicine() {
+        missedCount++;
+        document.getElementById("missed").innerText = missedCount;
+    }
+
+    // Alarm function
+    function setAlarm() {
+        let alarmTime = document.getElementById("alarmTime").value;
+        document.getElementById("alarmStatus").innerText = "Alarm set for " + alarmTime;
+
+        setInterval(() => {
+            let now = new Date();
+            let currentTime = now.getHours().toString().padStart(2, '0') + ":" + 
+                              now.getMinutes().toString().padStart(2, '0');
+
+            if (currentTime === alarmTime) {
+                alert("Time to take your medicine!");
+            }
+        }, 60000);
+    }
+</script>
+
+</body>
+</html>

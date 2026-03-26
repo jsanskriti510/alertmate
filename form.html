@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Login</title>
+    <style>
+        /* 1. Center everything in the viewport */
+        body { 
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eba937; /* Light grey/blue background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+        }
+
+        /* 2. Style the login card */
+        .login-container { 
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: center;
+        }
+
+        h3 { margin-bottom: 20px; color: #333; }
+
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin: 10px 0; 
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+            outline: none;
+        }
+
+        input:focus { border-color: #007bff; }
+
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #010b16; 
+            color: white; 
+            border: none; 
+            border-radius: 6px;
+            cursor: pointer; 
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        button:hover { background-color: #0056b3; }
+
+        #message { 
+            margin-top: 15px; 
+            font-size: 14px; 
+            min-height: 20px; /* Prevents layout jump when text appears */
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h3>Device Login</h3>
+    <input type="text" id="deviceId" placeholder="Enter Device ID">
+    <button onclick="checkLogin()">Login</button>
+    <p id="message"></p>
+</div>
+
+<script>
+    function checkLogin() {
+        const inputId = document.getElementById('deviceId').value;
+        const messageDisplay = document.getElementById('message');
+
+        if (inputId === "12345") {
+            messageDisplay.style.color = "#28a745";
+            messageDisplay.innerText = "Access Granted! Redirecting...";
+        } else {
+            messageDisplay.style.color = "#dc3545";
+            messageDisplay.innerText = "Incorrect device ID.";
+        }
+    }
+</script>
+
+</body>
+</html>
