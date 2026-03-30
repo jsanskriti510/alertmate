@@ -79,6 +79,10 @@
         if (inputId === "12345") {
             messageDisplay.style.color = "#28a745";
             messageDisplay.innerText = "Access Granted! Redirecting...";
+             // Redirect after 1 second
+            setTimeout(function() {
+                window.location.href = "index2.html"; // Change to your target page
+            }, 1000); // 1000ms = 1 second delay
         } else {
             messageDisplay.style.color = "#dc3545";
             messageDisplay.innerText = "Incorrect device ID.";

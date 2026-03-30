@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlertMate Dashboard</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: white;
+    }
+
+    header {
+        text-align: center;
+        padding: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.08);
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        width: 300px;
+    }
+
+    .title {
+        font-size: 18px;
+        opacity: 0.8;
+    }
+
+    .value {
+        font-size: 70px;
+        font-weight: bold;
+        margin: 20px 0;
+        color: #38bdf8;
+    }
+
+    .status {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #4ade80;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 10px;
+        background: #ef4444;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        background: #dc2626;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    AlertMate Dashboard
+
+    <a href="homepage.html">Homepage</a>
+    <a href="about_us.html" target="_blank">About Us</a>
+    <a href="contact.html" target="_blank">Contact Us</a>
+    <a href="features.html" target="_blank">Features</a>
+</header>
+
+<div class="container">
+    <div class="card">
+        <div class="title">Total Falls Detected</div>
+        <div class="value" id="falls">0</div>
+        <div class="status">● System Online</div>
+
+        <button onclick="resetFalls()">Reset</button>
+    </div>
+</div>
+
+<footer>
+    <a href="privacy_policy.html" target="_blank">Privacy Policy</a>
+</footer>
+
+<script>
+function loadFalls() {
+    fetch('get_falls.php')
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("falls").innerText = data;
+        })
+        .catch(() => {
+            document.getElementById("falls").innerText = "Error";
+        });
+}
+
+function resetFalls() {
+    fetch('reset.php')
+        .then(() => loadFalls());
+}
+
+// refresh every 2 sec
+setInterval(loadFalls, 2000);
+
+// initial load
+loadFalls();
+</script>
+
+</body>
+</html>
