@@ -9,32 +9,36 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f7fa;
-            color: #333;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            /* Using the Cream color for a warm background */
+            background: #FAF3DD; 
+            color: #16443b;
+            line-height: 1.6;
         }
 
         header {
-            background: #0a2540;
-            color: white;
+            /* Using the Deep Slate for a professional header */
+            background: #27a088;
+            color: #FAF3DD;
             text-align: center;
-            padding: 50px 20px;
+            padding: 60px 20px;
         }
 
         header h1 {
             margin: 0;
             font-size: 40px;
+            letter-spacing: 1px;
         }
 
         header p {
             margin-top: 10px;
-            font-size: 18px;
-            opacity: 0.8;
+            font-size: 20px;
+            color: #AED9E0; /* Soft blue for subtext */
         }
 
         section {
-            padding: 60px 20px;
-            max-width: 1000px;
+            padding: 40px 20px;
+            max-width: 900px;
             margin: auto;
         }
 
@@ -42,39 +46,56 @@
             background: white;
             padding: 30px;
             margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            /* Subtle mint border for a clean look */
+            border-left: 8px solid #B8F2E6; 
+              box-shadow: 0 4px 10px #ffa69e;
+
         }
 
         .card h2 {
-            color: #0a2540;
+            /* Using the Slate color for headings */
+            color: #5E6472;
+            margin-top: 0;
         }
 
-        .highlight {
-            color: #0077ff;
-            font-weight: bold;
-        }
+        
 
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 20px;
-            background: #0077ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
+        
 
         .btn:hover {
-            background: #005fcc;
+            background: #ff8e82;
+            transform: translateY(-2px);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        /* Adding a little mint bullet point */
+        li::before {
+            content: "•";
+            color: #B8F2E6;
+            font-weight: bold;
+            font-size: 24px;
+            position: absolute;
+            left: 0;
+            top: -5px;
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            background: #0a2540;
-            color: white;
+            padding: 40px 20px;
+            background: #5E6472;
+            color: #AED9E0;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -84,14 +105,15 @@
     <header>
         <h1>About AlertMate</h1>
         <p>Your Safety. Our Priority.</p>
+        <a href="howitworks.html">How it works?</a>
     </header>
 
     <section>
 
         <div class="card">
-            <h2>Who We Are</h2>
+            <h2>Who We Are?</h2>
             <p>
-                <span class="highlight">AlertMate</span> Our project introduces an integrated IoT-based
+                <span class="highlight">Our project introduces an integrated IoT-based
                 solution designed to enhance the safety and health of
                 individuals living independently. By combining Real
                 time Fall Detection with an Automated Medicine
@@ -108,7 +130,7 @@
         <div class="card">
             <h2>Our Mission</h2>
             <p>
-                Our mission is simple — Our mission is to provide a comprehensive "digital companion" that empowers
+                Our mission is to provide a comprehensive "digital companion" that empowers
                 individuals to live independently by addressing the two most critical risks in elderly care: physical
                 accidents and medication non-compliance. By integrating IoT-based real-time fall detection with
                 automated medicine reminders, we aim to eliminate the dangerous "long-lie" period after a fall through
@@ -117,11 +139,10 @@
                 utilizing cost-effective, high-quality components.
             </p>
         </div>
-
         <div class="card">
-            <h2>What We Do</h2>
+            <h2>What We Do?</h2>
             <p>
-                Our emergency band is equipped with intelligent sensors that detect sudden falls
+                               Our emergency band is equipped with intelligent sensors that detect sudden falls
                 and unusual movements. Once detected, the device sends real-time alerts,
                 ensuring quick response during critical moments.
             <ul>
@@ -139,29 +160,19 @@
         <div class="card">
             <h2>Why Choose Us?</h2>
             <ul>
-                <li>✔ Real-time emergency alerts</li>
-                <li>✔ Smart fall detection</li>
-                <li>✔ Easy to use wearable device</li>
-                <li>✔ Reliable and fast response system</li>
+                <li>Real-time emergency alerts</li>
+                <li>Smart fall detection technology</li>
+                <li>Accessible for lower-income families</li>
+                <li>Zero monthly subscription fees</li>
             </ul>
+           
         </div>
 
     </section>
 
     <footer>
-        <p>© 2026 AlertMate | All Rights Reserved</p>
+        <p>© 2026 AlertMate | Providing Peace of Mind | All Rights Reserved</p>
     </footer>
-
-    <script>
-        function showMore() {
-            let text = document.getElementById("moreText");
-            if (text.style.display === "none") {
-                text.style.display = "block";
-            } else {
-                text.style.display = "none";
-            }
-        }
-    </script>
 
 </body>
 

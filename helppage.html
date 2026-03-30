@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlertMate - Help Page</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      /* Background: FAF3DD (Cream) */
+      background: #FAF3DD;
+      color: #333;
+    }
+
+    header {
+      /* Header: 5E6472 (Deep Slate) */
+      background: #27a088;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+     
+    }
+
+    section {
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      /* Title: 5E6472 */
+      color: #5E6472;
+      border-bottom: 2px solid #AED9E0;
+      padding-bottom: 10px;
+      margin-top: 40px;
+    }
+
+    .faq-item {
+      margin: 15px 0;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(94, 100, 114, 0.1);
+      overflow: hidden;
+      border-left: 5px solid #ffa69e; /* Teal Accent */
+    }
+
+    .faq-question {
+      padding: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      /* Light Teal Background for questions: B8F2E6 */
+      background: #f1fdfb; 
+      transition: background 0.3s ease;
+      color: #5E6472;
+    }
+
+    .faq-question:hover {
+      background: #B8F2E6;
+    }
+
+    .faq-answer {
+      padding: 20px;
+      display: none;
+      /* Using soft slate for text contrast */
+      background: #ffffff;
+      color: #444;
+      line-height: 1.6;
+      border-top: 1px solid #eee;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin: 20px 0;
+      box-shadow: 0 4px 10px #ffa69e;
+    }
+
+    /* Styling the list items with Teal bullets */
+    ul {
+      padding-left: 20px;
+      list-style: none;
+    }
+
+    ul li::before {
+      content: "•";
+      color: #27a088;
+      font-weight: bold;
+      display: inline-block; 
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #5E6472;
+      color: #FAF3DD;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>AlertMate Help Center</h1>
+  <p>Your Smart Alert & Notification Assistant</p>
+  <span><a href="howitworks.html">How it works?</a></span> 
+</header>
+
+<section>
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <div class="faq-question">What is AlertMate?</div>
+    <div class="faq-answer">AlertMate is a wearable device that detects falls and instantly sends alerts to caregivers or family members, helping ensure quick assistance when every second counts.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">How does AlertMate work?</div>
+    <div class="faq-answer">Using advanced motion sensors, it monitors for sudden impacts. If a fall is detected and not dismissed by the user, it automatically triggers notifications through our secure cloud system.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Is AlertMate free to use?</div>
+    <div class="faq-answer">AlertMate costs approximately ₹4000 as a one-time hardware purchase. The best part? There are no monthly subscription fees for our standard alert services.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">Can I customize alerts?</div>
+    <div class="faq-answer">Absolutely! Via the companion app, you can set contact priorities, timing delays, and choose between SMS, call, or app notification triggers.</div>
+  </div>
+
+  <h2>Key Features</h2>
+  <div class="card">
+    <ul>
+      <li>Instant emergency notifications</li>
+      <li>Priority-based caregiver alerts</li>
+      <li>Customizable scheduling and "Do Not Disturb" modes</li>
+      <li>Multi-device synchronization</li>
+      <li>Secure and encrypted data handling</li>
+    </ul>
+  </div>
+
+  <h2>Future Roadmap</h2>
+  <div class="card">
+    <ul>
+      <li>AI-based predictive gait analysis</li>
+      <li>Full integration with Smart Home ecosystems (Alexa/Google Home)</li>
+      <li>Voice-controlled SOS triggers</li>
+      <li>Comprehensive wellness analytics dashboard</li>
+      <li>Global roaming and cloud sync capabilities</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 AlertMate | All Rights Reserved</p>
+</footer>
+
+<script>
+  const questions = document.querySelectorAll('.faq-question');
+
+  questions.forEach(q => {
+    q.addEventListener('click', () => {
+      const answer = q.nextElementSibling;
+      const isOpen = answer.style.display === 'block';
+      
+      // Close other open answers (optional, for a cleaner accordion feel)
+      document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+      
+      answer.style.display = isOpen ? 'none' : 'block';
+    });
+  });
+</script>
+
+</body>
+</html>

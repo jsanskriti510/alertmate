@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How AlertMate Works</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Using FAF3DD (Cream) for a soft background */
+            background: #FAF3DD;
+            color: #333;
+        }
+
+        header {
+            /* Using 5E6472 (Deep Slate) for the header */
+            background: #27a088;
+            color: white;
+            text-align: center;
+            padding: 40px 25px;
+           
+        }
+
+        section {
+            max-width: 1000px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+
+            color: #27a088;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .step-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            /* Soft shadow using the slate color with low opacity */
+            box-shadow: 0 6px 15px #ffa69e;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border-bottom: 4px solid transparent;
+        }
+
+        .step-card:hover {
+            transform: translateY(-8px);
+            /* Highlight border using your custom Teal #27a088 */
+            border-bottom: 4px solid #27a088;
+            box-shadow: 0 10px 20px rgba(94, 100, 114, 0.2);
+        }
+
+        .step-number {
+            font-size: 28px;
+            font-weight: bold;
+            /* Using your requested #27a088 */
+            color: #27a088;
+        }
+
+        .step-title {
+            font-size: 20px;
+            margin: 12px 0;
+            font-weight: bold;
+            color: #5E6472;
+        }
+
+        .step-desc {
+            display: none;
+            margin-top: 15px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .active .step-desc {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            /* Using 5E6472 for footer to match header */
+            background: #5E6472;
+            color: #FAF3DD;
+            margin-top: 40px;
+        }
+
+        /* Small decorative element using AED9E0 (Light Blue) */
+        .step-card.active {
+            background-color: #f9ffff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>How AlertMate Works</h1>
+        <p>Simple • Smart • Reliable Alert System</p>
+    </header>
+
+    <section>
+        <h2>Working Process</h2>
+
+        <div class="steps">
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-title">Device Activation</div>
+                <div class="step-desc">AlertMate is turned on and starts monitoring continuously to ensure your safety
+                    from the moment you wear it.</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-title">Data Collection</div>
+                <div class="step-desc">High-precision sensors like the accelerometer and gyroscope collect real-time
+                    motion data 24/7.</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-title">Movement Detection</div>
+                <div class="step-desc">The system differentiates between daily activities and sudden impact. Normal
+                    movements are ignored, while high-velocity changes trigger the next phase.</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div class="step-title">Validation</div>
+                <div class="step-desc">Sophisticated algorithms analyze the impact. If it's a false alarm (like dropping
+                    the device), it is ignored. If a real fall is confirmed, the alert sequence begins.</div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <div class="step-title">Alert Transmission</div>
+                <div class="step-desc">Once a fall is validated, an emergency signal is instantly sent to your emergency
+                    contacts or caregivers with your location data.</div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 AlertMate | Protecting What Matters</p>
+    </footer>
+
+    <script>
+        const cards = document.querySelectorAll('.step-card');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

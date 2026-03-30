@@ -1,180 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlertMate Dashboard</title>
 
     <style>
+        /* New Color Palette Mapping */
+        :root {
+            --primary-coral: #27a088;
+            /* Header/Accents */
+            --bg-cream: #FAF3DD;
+            /* Page Background */
+            --mint: #B8F2E6;
+            /* Buttons/Primary Icons */
+            --sky-blue: #AED9E0;
+            /* Card Accents/Value text */
+            --dark-slate: #5E6472;
+            /* Text/Footer/Headers */
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-cream);
+            color: var(--dark-slate);
         }
 
         header {
-            background: #0a2540;
+            background: var(--primary-coral);
             color: white;
-            padding: 20px;
+            padding: 30px;
             text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 30px;
+            gap: 25px;
+            padding: 40px;
         }
 
         .card {
             background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px #ffa69e;
             text-align: center;
-            transition: 0.3s;
-            position: relative;
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--sky-blue);
+
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
         }
 
         .card h2 {
-            margin-bottom: 10px;
-            color: #0a2540;
+            margin-bottom: 15px;
+            color: var(--dark-slate);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
         }
 
         .value {
-            font-size: 40px;
+            font-size: 48px;
             font-weight: bold;
-            color: #0077ff;
+            color: var(--dark-slate);
         }
 
+        /* Using Mint for Buttons */
         .btn {
             margin-top: 15px;
-            padding: 10px 15px;
-            background: #0077ff;
-            color: white;
+            padding: 12px 20px;
+            background: var(--mint);
+            color: var(--dark-slate);
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
         }
 
         .btn:hover {
-            background: #005fcc;
+            background: #a2ded1;
+            filter: brightness(0.95);
         }
 
         input {
-            padding: 8px;
+            padding: 10px;
             margin-top: 10px;
-            width: 80%;
+            width: 85%;
+            border: 2px solid var(--sky-blue);
+            border-radius: 6px;
+            outline: none;
         }
 
         footer {
             text-align: center;
-            padding: 15px;
-            background: #0a2540;
-            color: white;
+            padding: 20px;
+            background: var(--dark-slate);
+            color: var(--bg-cream);
+            margin-top: 40px;
         }
 
-        /* 🔒 Locked Feature Styling */
+        /* 🔒 Locked Feature Styling - Using grayscale of the slate */
         .locked {
-            background: #e0e0e0;
-            color: #777;
+            background: #efefef;
+            border-top: 5px solid #ccc;
+            opacity: 0.8;
         }
 
         .locked .value {
-            color: #999;
+            color: #bbb;
         }
 
         .locked .btn {
-            background: #aaa;
+            background: #ddd;
+            color: #999;
             cursor: not-allowed;
         }
-
-        .locked:hover {
-            transform: none;
-        }
-
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>AlertMate Dashboard</h1>
-    <p>Monitor Health & Safety in Real-Time</p>
-</header>
+    <header>
+        <h1>AlertMate</h1>
+        <p>Soft, Secure, Real-Time Monitoring</p>
+    </header>
+    <a href="howitworks.html">How it works?</a>
+    <div class="dashboard">
 
-<div class="dashboard">
+        <div class="card" style="border-top-color: var(--primary-coral);">
+            <h2>No. of Falls</h2>
+            <div class="value" id="falls">0</div>
+        </div>
 
-    <!-- Number of Falls -->
-    <div class="card">
-        <h2>No. of Falls</h2>
-        <div class="value" id="falls">0</div>
+        <div class="card">
+            <h2>Medicine Alarm</h2>
+            <input type="time" id="alarmTime">
+            <br>
+            <button class="btn" onclick="setAlarm()">Set Alarm</button>
+            <p id="alarmStatus" style="font-size: 0.9rem; margin-top: 10px;"></p>
+        </div>
+
+        <div class="card">
+            <h2>Missed (Month)</h2>
+            <div class="value" id="missed">0</div>
+            <button class="btn" onclick="missMedicine()">Log Missed</button>
+        </div>
+
+        <div class="card locked">
+            <h2>Heartbeat</h2>
+            <div class="value">-- bpm</div>
+            <p>Future Device Feature</p>
+        </div>
+
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-    <!-- Medicine Alarm -->
-    <div class="card">
-        <h2>Medicine Alarm</h2>
-        <input type="time" id="alarmTime">
-        <br>
-        <button class="btn" onclick="setAlarm()">Set Alarm</button>
-        <p id="alarmStatus"></p>
-    </div>
 
-    <!-- Missed Medicines -->
-    <div class="card">
-        <h2>Missed Medicines (Month)</h2>
-        <div class="value" id="missed">0</div>
-        <button class="btn" onclick="missMedicine()">Missed</button>
-    </div>
+    <footer>
+        <p>© 2026 AlertMate Dashboard • Designed for Care</p>
+    </footer>
 
-    <!-- 🔒 Heartbeat (Locked Feature) -->
-    <div class="card locked">
-        <h2>Heartbeat </h2>
-        <div class="value">-- bpm</div>
-        <p>Coming Soon (Future Device Feature)</p>
-    </div>
+    <script>
+        // Falls counter
+        let fallCount = 0;
+        // Note: This function wasn't called in original HTML, but I've kept it for your logic
+        function increaseFalls() {
+            fallCount++;
+            document.getElementById("falls").innerText = fallCount;
+        }
 
-</div>
+        // Missed medicine counter
+        let missedCount = 0;
+        function missMedicine() {
+            missedCount++;
+            document.getElementById("missed").innerText = missedCount;
+        }
 
-<footer>
-    <p>© 2026 AlertMate Dashboard</p>
-</footer>
+        // Alarm function
+        function setAlarm() {
+            let alarmTime = document.getElementById("alarmTime").value;
+            if (!alarmTime) return alert("Please select a time!");
 
-<script>
-    // Falls counter
-    let fallCount = 0;
-    function increaseFalls() {
-        fallCount++;
-        document.getElementById("falls").innerText = fallCount;
-    }
+            document.getElementById("alarmStatus").innerText = "🔔 Active for " + alarmTime;
 
-    // Missed medicine counter
-    let missedCount = 0;
-    function missMedicine() {
-        missedCount++;
-        document.getElementById("missed").innerText = missedCount;
-    }
+            setInterval(() => {
+                let now = new Date();
+                let currentTime = now.getHours().toString().padStart(2, '0') + ":" +
+                    now.getMinutes().toString().padStart(2, '0');
 
-    // Alarm function
-    function setAlarm() {
-        let alarmTime = document.getElementById("alarmTime").value;
-        document.getElementById("alarmStatus").innerText = "Alarm set for " + alarmTime;
-
-        setInterval(() => {
-            let now = new Date();
-            let currentTime = now.getHours().toString().padStart(2, '0') + ":" + 
-                              now.getMinutes().toString().padStart(2, '0');
-
-            if (currentTime === alarmTime) {
-                alert("Time to take your medicine!");
-            }
-        }, 60000);
-    }
-</script>
+                if (currentTime === alarmTime) {
+                    alert("Time to take your medicine!");
+                }
+            }, 60000);
+        }
+    </script>
 
 </body>
+
 </html>

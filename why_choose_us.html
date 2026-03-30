@@ -8,36 +8,41 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      /* Using the Cream color for the main background */
+      background: #FAF3DD;
+      color: #5E6472; /* Dark Slate for text */
     }
 
     header {
-      background: #2a7de1;
+      /* Using the Sky Blue for the header */
+      background: #27a088;
       padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
     header h1 {
       margin: 0;
+      color: #5E6472;
+      font-size: 24px;
     }
 
     nav a {
-      color: white;
+      color: #5E6472;
       margin-left: 20px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 600;
     }
 
     .hero {
       text-align: center;
       padding: 80px 20px;
-      background: linear-gradient(to right, #2a7de1, #6aa9ff);
-      color: white;
+      /* Gradient using the Mint and Sky Blue */
+      background: linear-gradient(135deg, #23b698, #AED9E0);
+      color: #f4f8ff;
     }
 
     .hero h2 {
@@ -46,31 +51,34 @@
     }
 
     .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      padding: 15px 35px;
       font-size: 18px;
-      margin-bottom: 20px;
-    }
-
-    .hero button {
-      padding: 12px 25px;
-      font-size: 16px;
+      font-weight: bold;
       border: none;
-      border-radius: 6px;
-      margin: 10px;
+      border-radius: 50px;
       cursor: pointer;
-    }
-
-    .primary-btn {
-      background: white;
-      color: #2a7de1;
-    }
-
-    .secondary-btn {
-      background: #ff4d4d;
+      transition: transform 0.2s, background 0.2s;
+      /* Using the Peach color for the main Action Button */
+      background: #FFA69E;
       color: white;
+      box-shadow: 0 4px 15px rgba(255, 166, 158, 0.4);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      background: #ff958a;
     }
 
     .section {
-      padding: 50px 20px;
+      padding: 60px 20px;
       text-align: center;
     }
 
@@ -78,33 +86,45 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 25px;
+      margin-top: 40px;
     }
 
     .feature-box {
       background: white;
-      padding: 20px;
-      width: 250px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 30px;
+      width: 260px;
+      border-radius: 15px;
+      /* Subtle border using the Mint color */
+      border-bottom: 5px solid #4ce2c4;
+      box-shadow: #FFA69E;
     }
 
     .feature-box h3 {
-      color: #2a7de1;
+      color: #FFA69E; /* Peach for titles */
+      margin-top: 0;
+    }
+
+    .how-it-works {
+      /* Softened version of the Sky Blue */
+      background: #f0f9fa;
+      border-radius: 30px;
+      margin: 20px;
+      padding: 40px;
     }
 
     footer {
-      background: #222;
-      color: white;
+      /* Dark Slate for the footer */
+      background: #5E6472;
+      color: #FAF3DD;
       text-align: center;
-      padding: 20px;
+      padding: 30px;
     }
 
     @media (max-width: 600px) {
       .hero h2 {
         font-size: 28px;
       }
-
       .features {
         flex-direction: column;
         align-items: center;
@@ -126,16 +146,14 @@
 
 <section class="hero">
   <h2>Protecting Your Loved Ones</h2>
-  <p>Smart alert system for elderly safety with instant notifications and SOS support.</p>
-
-  <button class="secondary-btn" onclick="goToFeatures()">View Features</button>
+  <p>A gentle, smart alert system for elderly safety providing peace of mind with instant notifications.</p>
+  <button class="cta-btn" onclick="goToFeatures()">View Features</button>
 </section>
 
 <section class="section">
-  <h2>Why Choose AlertMate?</h2>
+  <h2 style="color: #5E6472;">Why Choose AlertMate?</h2>
 
   <div class="features">
-
     <div class="feature-box">
       <h3>Instant Fall Alerts</h3>
       <p>Notify family members immediately when a fall is detected.</p>
@@ -143,29 +161,30 @@
 
     <div class="feature-box">
       <h3>SOS Emergency</h3>
-      <p>Double press sends urgent SOS alerts instantly.</p>
+      <p>A simple double-press sends urgent alerts to your circle.</p>
     </div>
 
     <div class="feature-box">
       <h3>Medicine Reminders</h3>
-      <p>Never miss important medications with timely alerts.</p>
+      <p>Never miss a dose with friendly, timely notifications.</p>
     </div>
 
     <div class="feature-box">
       <h3>Smart Buzzer</h3>
-      <p>Loud alerts ensure attention in emergencies.</p>
+      <p>Audible alerts designed to be heard without being startling.</p>
     </div>
-
   </div>
 </section>
 
-<section class="section" style="background:#e8f1ff;">
-  <h2>How It Works</h2>
-  <p>
-    A simple button-based system that connects elderly users with their families.  
-    One press alerts a fall. Double press triggers SOS.  
-    Built for simplicity, speed, and reliability.
-  </p>
+<section class="section">
+  <div class="how-it-works">
+    <h2>How It Works</h2>
+    <p style="line-height: 1.6; max-width: 700px; margin: 0 auto;">
+      AlertMate uses a simple one-button interface. One press records a potential slip, 
+      while a double press triggers a high-priority SOS. It’s built for simplicity, 
+      ensuring safety is never complicated.
+    </p>
+  </div>
 </section>
 
 <footer>

@@ -7,55 +7,70 @@
 
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      background: #f4f7fb;
-      color: #333;
+      /* Using the Cream color for the main background */
+      background: #FAF3DD; 
+      color: #5E6472; /* Dark Slate for text */
     }
 
     header {
-      background: #2a7de1;
-      color: white;
-      padding: 20px;
+      /* Using the Mint/Seafoam for the header */
+      background: #27a088;
+      color: #d2d9e8;
+      padding: 40px 20px;
       text-align: center;
+      border-bottom: 3px solid #AED9E0;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      letter-spacing: 1px;
     }
 
     .container {
-      max-width: 800px;
-      margin: 40px auto;
+      max-width: 600px;
+      margin: -30px auto 40px; /* Slight overlap with header */
       background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(94, 100, 114, 0.1);
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 10px;
+      color: #5E6472;
     }
 
     p {
       text-align: center;
-      color: #666;
-    }
-
-    form {
-      margin-top: 20px;
+      color: #7a8191;
     }
 
     label {
       display: block;
-      margin-top: 15px;
+      margin-top: 20px;
       font-weight: bold;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     input, textarea {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 2px solid #AED9E0; /* Soft Blue border */
+      font-size: 16px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #FFA69E; /* Coral highlight on focus */
     }
 
     textarea {
@@ -64,75 +79,83 @@
     }
 
     button {
-      margin-top: 20px;
+      margin-top: 30px;
       width: 100%;
-      padding: 12px;
-      background: #2a7de1;
+      padding: 15px;
+      /* Using Coral for the Action Button */
+      background: #FFA69E;
       color: white;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
       cursor: pointer;
+      transition: transform 0.2s, background 0.3s;
     }
 
     button:hover {
-      background: #1f63b6;
+      background: #ff8e83;
+      transform: translateY(-2px);
     }
 
     .contact-info {
-      margin-top: 30px;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
       text-align: center;
       font-size: 14px;
-      color: #555;
     }
 
     .success-message {
       display: none;
       margin-top: 20px;
-      color: green;
+      padding: 15px;
+      background: #B8F2E6;
+      border-radius: 8px;
+      color: #2d5a50;
       text-align: center;
+      font-weight: bold;
     }
 
     @media (max-width: 600px) {
       .container {
-        margin: 20px;
+        margin: 10px;
         padding: 20px;
       }
     }
   </style>
 </head>
-
 <body>
 
 <header>
   <h1>AlertMate</h1>
-  <p>Keeping your loved ones safe</p>
+  <p style="color: #d4d5d8; opacity: 0.8;">Keeping your loved ones safe</p>
 </header>
 
 <div class="container">
-  <h2>Contact Us</h2>
-  <p>Have questions or need help? We're here for you.</p>
+  <h2>Get in Touch</h2>
+  <p>Have questions about your safety alerts? We're here to help 24/7.</p>
 
   <form id="contactForm">
     <label for="name">Full Name</label>
-    <input type="text" id="name" required>
+    <input type="text" id="name" placeholder="John Doe" required>
 
     <label for="email">Email Address</label>
-    <input type="email" id="email" required>
+    <input type="email" id="email" placeholder="john@example.com" required>
 
     <label for="message">Your Message</label>
-    <textarea id="message" required></textarea>
+    <textarea id="message" placeholder="How can we help you today?" required></textarea>
 
     <button type="submit">Send Message</button>
   </form>
 
   <div class="success-message" id="successMsg">
-    ✅ Your message has been sent. We'll get back to you soon.
+    ✅ Message received! We'll reach out shortly.
   </div>
 
   <div class="contact-info">
     <p><strong>Email:</strong> support@alertmate.com</p>
-    <p><strong>Emergency Support:</strong> Available 24/7</p>
+    <p><strong>Emergency:</strong> Help is always a click away.</p>
   </div>
 </div>
 
@@ -142,10 +165,8 @@
 
   form.addEventListener('submit', function(e) {
     e.preventDefault();
-
-    // Simulate sending
     successMsg.style.display = 'block';
-    form.reset();
+    form.style.display = 'none'; // Hide form on success for better UX
   });
 </script>
 

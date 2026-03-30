@@ -6,65 +6,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    :root {
+      --coral: #FFA69E;   /* Fall Alert */
+      --cream: #FAF3DD;   /* Background */
+      --mint: #B8F2E6;    /* Medicine Reminder */
+      --sky: #27a088;     /* Header/Secondary */
+      --slate: #5E6472;   /* Text/Dark Elements */
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--cream);
+      color: var(--slate);
       margin: 0;
       text-align: center;
     }
 
     header {
-      background: #2a7de1;
-      color: white;
-      padding: 20px;
+      background: var(--sky);
+      color: var(--slate);
+      padding: 30px;
+      border-bottom: 3px solid var(--coral);
     }
 
     .container {
       margin-top: 40px;
+      padding: 0 20px;
     }
 
     button {
-      padding: 15px 25px;
-      margin: 15px;
-      font-size: 16px;
+      width: 100%;
+      max-width: 300px;
+      padding: 18px;
+      margin: 10px 0;
+      font-size: 18px;
+      font-weight: bold;
       border: none;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
+      transition: transform 0.1s, opacity 0.2s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      color: var(--slate);
     }
 
-    .alert-btn {
-      background: #ff4d4d;
-      color: white;
+    button:active {
+      transform: scale(0.98);
     }
 
-    .sos-btn {
-      background: #ff9900;
-      color: white;
+    /* Mapping colors from your palette */
+    .alert-btn { background: var(--coral); }
+    .sos-btn { 
+      background: var(--slate); 
+      color: white; 
     }
-
-    .med-btn {
-      background: #2ecc71;
-      color: white;
-    }
+    .med-btn { background: var(--mint); }
 
     .status {
       margin-top: 30px;
-      font-size: 18px;
+      padding: 15px;
+      font-size: 20px;
       font-weight: bold;
+      min-height: 1.5em;
     }
 
     .log {
-      margin-top: 20px;
+      margin: 20px auto;
       max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
       text-align: left;
       background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      height: 200px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      height: 150px;
       overflow-y: auto;
+      border-left: 5px solid var(--sky);
+      font-family: monospace;
     }
   </style>
 </head>
@@ -72,24 +88,19 @@
 <body>
 
 <header>
-  <h1>AlertMate Demo Simulation</h1>
-  <p>Test how the system works</p>
+  <h1>AlertMate</h1>
+  <p>Safety & Wellness Monitoring</p>
 </header>
 
 <div class="container">
-
-  <button class="alert-btn" onclick="singlePress()">Single Press (Fall Alert)</button>
+  <button class="alert-btn" onclick="singlePress()">⚠️ Fall Alert</button>
   <br>
-
-  <button class="sos-btn" onclick="doublePress()">Double Press (SOS)</button>
+  <button class="med-btn" onclick="medicineReminder()">💊 Medicine Reminder</button>
   <br>
+  <button class="sos-btn" onclick="doublePress()">🆘 Emergency SOS</button>
 
-  <button class="med-btn" onclick="medicineReminder()">Medicine Reminder</button>
-
-  <div class="status" id="status">System Ready</div>
-
+  <div class="status" id="status">System Active</div>
   <div class="log" id="log"></div>
-
 </div>
 
 <script>
@@ -97,39 +108,36 @@
   const log = document.getElementById("log");
 
   function addLog(message) {
-    const time = new Date().toLocaleTimeString();
-    log.innerHTML += `[${time}] ${message}<br>`;
-    log.scrollTop = log.scrollHeight;
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    log.innerHTML = `<div style="margin-bottom:5px;"><strong>[${time}]</strong> ${message}</div>` + log.innerHTML;
   }
 
   function buzzer() {
+    // Note: Browsers often block auto-audio until first user interaction
     const beep = new Audio("https://www.soundjay.com/buttons/beep-07.wav");
-    beep.play();
+    beep.play().catch(e => console.log("Audio waiting for interaction"));
   }
 
   function singlePress() {
     buzzer();
-    status.innerText = "Fall Detected! Alert sent to family.";
-    addLog("Fall alert triggered. Notification sent.");
+    status.innerText = "Fall Detected! Notifying Family...";
+    status.style.color = "#d6685e"; // Darker coral for text
+    addLog("Fall alert triggered.");
   }
 
   function doublePress() {
     buzzer();
-    status.innerText = "SOS Sent! Immediate help required.";
-    addLog("SOS alert sent to emergency contacts.");
+    status.innerText = "SOS SENT! Emergency services called.";
+    status.style.color = "black";
+    addLog("CRITICAL: SOS alert sent.");
   }
 
   function medicineReminder() {
     buzzer();
-    status.innerText = "Time to take your medicine!";
-    addLog("Medicine reminder triggered.");
+    status.innerText = "Time for your medication.";
+    status.style.color = "#6bbcae"; // Darker mint for text
+    addLog("Medication reminder issued.");
   }
-
-  // Optional auto reminder simulation (every 30 sec)
-  setInterval(() => {
-    medicineReminder();
-  }, 30000);
-
 </script>
 
 </body>
