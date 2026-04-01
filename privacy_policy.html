@@ -1,120 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Privacy Policy | AlertMate</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    :root {
+      --coral: #FFA69E;
+      --cream: #FAF3DD;
+      --mint: #B8F2E6;
+      --sky: #27a088;
+      --slate: #5E6472;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
       margin: 0;
-      background: #FAF3DD;
-      color: #5E6472;
+      background: var(--cream);
+      color: var(--slate);
       line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
+    /* --- Navigation Bar (Matching Image) --- */
     header {
-      background: #28a088;
+      background: var(--sky);
       color: #ffffff;
-      padding: 20px 1px;
-      text-align: center;
-      border-bottom: 4px solid #ffa69e;
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 4px solid var(--coral);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .container {
-      max-width: 900px;
-      margin: 30px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: #ffa69e;
-    }
- footer {
-      text-align: center;
-      padding: 20px;
-      background: #5E6472;
-      color: #ffffff;
-      margin-top: 40px;
-    }
-    h1 {
+    header h1 {
       margin: 0;
-      color: #ffffff;
+      font-size: 26px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: opacity 0.2s;
+    }
+
+    nav ul li a:hover {
+      opacity: 0.8;
+    }
+
+    /* --- Content Layout --- */
+    .container {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     }
 
     h2 {
-      color: #0c6e5b;
-      border-left: 5px solid #ffa69e;
-      padding-left: 10px;
+      color: var(--sky);
+      border-left: 5px solid var(--coral);
+      padding-left: 15px;
+      margin-top: 30px;
+      font-size: 1.4rem;
     }
 
     p {
       margin-bottom: 15px;
     }
 
+    ul {
+      padding-left: 20px;
+    }
+
     ul li {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: var(--slate);
+      color: #ffffff;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: underline;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+      }
+
+      nav ul {
+        gap: 15px;
+      }
+
+      .container {
+        margin: 20px 15px;
+        padding: 25px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>AlertMate</h1>
-  <p><strong>Privacy Policy</strong></p>
-  <a href="howitworks.html">How it works?</a>
-</header>
+  <header>
+    <h1>AlertMate</h1>
+    <nav>
+      <ul>
+        <li><a href="why_choose_us.html">Features</a></li>
+        <li><a href="demo.html">Demo</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="howitworks.html">How it works?</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<div class="container">
-  <h2>1. Introduction</h2>
-  <p>AlertMate is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your information.</p>
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h1 style="color: var(--slate); font-size: 2.2rem; margin-bottom: 10px;">Privacy Policy</h1>
+      <p>Last Updated: April 2026</p>
+    </div>
 
-  <h2>2. Information We Collect</h2>
-  <p>We may collect:</p>
-  <ul>
-    <li>Personal details (name, email, phone number, DeviceId)</li>
-    <li>Emergency contact information</li>
-    <li>Location data (only when necessary for alerts)</li>
-    <li>Device and usage data</li>
-  </ul>
+    <h2>1. Introduction</h2>
+    <p>AlertMate is committed to protecting your privacy. This policy explains how we collect, use, and safeguard your
+      information to ensure the best possible safety monitoring experience.</p>
 
-  <h2>3. How We Use Your Information</h2>
-  <p>Your data is used to:</p>
-  <ul>
-    <li>Send emergency alerts to your contacts</li>
-    <li>Improve our fall detection services</li>
-    <li>Provide customer support</li>
-  </ul>
+    <h2>2. Information We Collect</h2>
+    <p>To provide reliable alerts, we may collect:</p>
+    <ul>
+      <li><strong>Personal details:</strong> Name, email, phone number, and DeviceID.</li>
+      <li><strong>Emergency contacts:</strong> Names and numbers of the people you want us to alert.</li>
+      <li><strong>Location data:</strong> GPS data used strictly when a fall or SOS is triggered.</li>
+      <li><strong>Usage data:</strong> How you interact with the app to improve detection accuracy.</li>
+    </ul>
 
-  <h2>4. Data Sharing</h2>
-  <p>We do not sell your data. We only share information with:</p>
-  <ul>
-    <li>Your selected emergency contacts</li>
-    <li>Service providers necessary to operate the app</li>
-  </ul>
+    <h2>3. How We Use Your Information</h2>
+    <p>Your data is used solely to:</p>
+    <ul>
+      <li>Transmit emergency alerts to your designated contacts immediately.</li>
+      <li>Improve our AI algorithms for better fall detection.</li>
+      <li>Provide technical and customer support.</li>
+    </ul>
 
-  <h2>5. Data Security</h2>
-  <p>We implement appropriate security measures to protect your personal data.</p>
+    <h2>4. Data Sharing</h2>
+    <p><strong>We do not sell your data.</strong> We only share information with:</p>
+    <ul>
+      <li>Your selected emergency contacts during an active alert.</li>
+      <li>Secure infrastructure providers (like SMS gateways) necessary to operate the service.</li>
+    </ul>
 
-  <h2>6. Your Rights</h2>
-  <p>You can request access or correction of your data at any time.</p>
+    <h2>5. Data Security</h2>
+    <p>We implement industry-standard encryption and security measures to protect your sensitive personal data from
+      unauthorized access.</p>
 
-  <h2>7. Changes to This Policy</h2>
-  <p>We may update this policy. Changes will be posted on this page.</p>
+    <h2>6. Your Rights</h2>
+    <p>You have the right to access, update, or request the deletion of your personal data at any time through your
+      account settings or by contacting us.</p>
 
-  <h2>8. Contact Us</h2>
-  <p>If you have questions, contact us at: support@alertmate.com</p>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<footer>
-    <p style="color: #ffffff; opacity: 0.8;">© 2026 AlertMate | Providing Peace of Mind | All Rights Reserved </p>
-    <a href="aboutus.html" style="color:#ffffff;">About Us</a>
+    <h2>7. Contact Us</h2>
+    <p>If you have any questions regarding this Privacy Policy, please contact our data protection team at: <a
+        href="mailto:support@alertmate.com"
+        style="color: var(--sky); font-weight: bold; text-decoration: none;">support@alertmate.com</a></p>
+  </div>
+
+  <footer>
+    <p style="opacity: 0.8;">© 2026 AlertMate | Providing Peace of Mind | All Rights Reserved </p>
+    <a href="aboutus.html">About Us</a>
   </footer>
+
 </body>
+
 </html>

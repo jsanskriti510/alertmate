@@ -7,42 +7,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    :root {
+      --coral: #FFA69E;
+      --cream: #FAF3DD;
+      --mint: #B8F2E6;
+      --sky: #27a088;
+      --slate: #5E6472;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      /* Using the Cream color for the main background */
-      background: #FAF3DD;
-      color: #5E6472;
-      /* Dark Slate for text */
+      background: var(--cream);
+      color: var(--slate);
     }
 
+    /* --- Navigation Bar (Matching Image & Demo Page) --- */
     header {
-      /* Using the Mint/Seafoam for the header */
-      background: #27a088;
+      background: var(--sky);
       color: #ffffff;
-      padding: 40px 20px;
-      text-align: center;
-      border-bottom: 3px solid #AED9E0;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #5E6472;
-      color: #ffffff;
-      margin-top: 40px;
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 4px solid var(--coral);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 1px;
+      font-size: 26px;
     }
 
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: opacity 0.2s;
+    }
+
+    nav ul li a:hover {
+      opacity: 0.8;
+    }
+
+    /* --- Form Container --- */
     .container {
       max-width: 600px;
-      margin: -30px auto 40px;
-      /* Slight overlap with header */
+      margin: 40px auto; /* Removed the negative overlap for a cleaner nav look */
       background: white;
       padding: 40px;
       border-radius: 12px;
@@ -51,7 +71,8 @@
 
     h2 {
       text-align: center;
-      color: #5E6472;
+      color: var(--slate);
+      margin-top: 0;
     }
 
     p {
@@ -75,7 +96,6 @@
       margin-top: 8px;
       border-radius: 8px;
       border: 2px solid #AED9E0;
-      /* Soft Blue border */
       font-size: 16px;
       box-sizing: border-box;
       transition: border-color 0.3s;
@@ -84,8 +104,7 @@
     input:focus,
     textarea:focus {
       outline: none;
-      border-color: #FFA69E;
-      /* Coral highlight on focus */
+      border-color: var(--coral);
     }
 
     textarea {
@@ -97,8 +116,7 @@
       margin-top: 30px;
       width: 100%;
       padding: 15px;
-      /* Using Coral for the Action Button */
-      background: #FFA69E;
+      background: var(--coral);
       color: white;
       border: none;
       border-radius: 8px;
@@ -125,18 +143,29 @@
       display: none;
       margin-top: 20px;
       padding: 15px;
-      background: #B8F2E6;
+      background: var(--mint);
       border-radius: 8px;
       color: #2d5a50;
       text-align: center;
       font-weight: bold;
     }
 
-    @media (max-width: 600px) {
-      .container {
-        margin: 10px;
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: var(--slate);
+      color: #ffffff;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
         padding: 20px;
+        gap: 15px;
       }
+      nav ul { gap: 15px; }
+      .container { margin: 20px 10px; padding: 20px; }
     }
   </style>
 </head>
@@ -145,8 +174,15 @@
 
   <header>
     <h1>AlertMate</h1>
-    <p style="color: #ffffff; opacity: 0.8;">Keeping your loved ones safe</p>
-    <a href="howitworks.html">How it works?</a>
+    <nav>
+      <ul>
+       <li><a href="why_choose_us.html">Features</a></li>
+        <li><a href="demo.html">Demo</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="howitworks.html">How it works?</a></li>
+      </ul>
+      </ul>
+    </nav>
   </header>
 
   <div class="container">
@@ -155,7 +191,7 @@
 
     <form id="contactForm">
       <label for="name">Full Name</label>
-      <input type="text" id="name" placeholder="abc" required>
+      <input type="text" id="name" placeholder="Your Name" required>
 
       <label for="email">Email Address</label>
       <input type="email" id="email" placeholder="abc@example.com" required>
@@ -175,14 +211,12 @@
       <p><strong>Emergency:</strong> Help is always a click away.</p>
     </div>
   </div>
-  <br>
-  <br>
-  <br>
-  <br>
+
   <footer>
-    <p style="color: #ffffff; opacity: 0.8;">© 2026 AlertMate | Providing Peace of Mind | All Rights Reserved </p>
+    <p style="opacity: 0.8;">© 2026 AlertMate | Providing Peace of Mind | All Rights Reserved </p>
     <a href="aboutus.html" style="color:#ffffff;">About Us</a>
   </footer>
+
   <script>
     const form = document.getElementById('contactForm');
     const successMsg = document.getElementById('successMsg');
@@ -190,10 +224,9 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       successMsg.style.display = 'block';
-      form.style.display = 'none'; // Hide form on success for better UX
+      form.style.display = 'none'; 
     });
   </script>
 
 </body>
-
 </html>

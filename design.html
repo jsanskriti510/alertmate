@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlertMate | Secure Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #27a088;    /* Teal */
+            --secondary: #ffa69e;  /* Coral/Pink */
+            --accent: #aed9e0;     /* Soft Blue */
+            --bg-light: #faf3dd;   /* Cream */
+            --text-dark: #2d3436;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            /* Animated gradient background using your palette */
+            background: linear-gradient(-45deg, #ffa69e, #faf3dd, #aed9e0, #27a088);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Card Effect */
+        .login-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .brand-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .brand-logo span {
+            color: var(--secondary);
+        }
+
+        p.subtitle {
+            color: #636e72;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        /* Modern Input Group */
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: #f9f9f9;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(39, 160, 136, 0.1);
+        }
+
+        /* Professional Button */
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(39, 160, 136, 0.3);
+        }
+
+        button:hover {
+            background-color: #1e8570;
+            box-shadow: 0 6px 20px rgba(39, 160, 136, 0.4);
+            transform: scale(1.02);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Status Messages */
+        #message {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            height: 20px;
+            transition: all 0.3s ease;
+        }
+
+        /* Pro Feature: Loading Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <div class="brand-logo">Alert<span>Mate</span></div>
+    <p class="subtitle">Secure Device Verification</p>
+    
+    <div class="input-group">
+        <input type="password" id="deviceId" placeholder="Enter Device ID" autocomplete="off">
+    </div>
+
+    <button onclick="checkLogin()" id="loginBtn">
+        <span id="btnText">Verify Access</span>
+        <div class="spinner" id="loader"></div>
+    </button>
+
+    <p id="message"></p>
+</div>
+
+<script>
+    function checkLogin() {
+        const inputId = document.getElementById('deviceId').value;
+        const messageDisplay = document.getElementById('message');
+        const btnText = document.getElementById('btnText');
+        const loader = document.getElementById('loader');
+        const loginBtn = document.getElementById('loginBtn');
+
+        // UI Feedback
+        btnText.style.display = 'none';
+        loader.style.display = 'block';
+        loginBtn.style.pointerEvents = 'none';
+
+        setTimeout(() => {
+            if (inputId === "12345") {
+                messageDisplay.style.color = "#27a088";
+                messageDisplay.innerText = "✓ Identity Verified. Redirecting...";
+                
+                // Success animation
+                document.querySelector('.login-card').style.boxShadow = "0 20px 40px rgba(39, 160, 136, 0.4)";
+                
+                setTimeout(() => {
+                    window.location.href = "index2.html";
+                }, 1500);
+            } else {
+                // Reset UI on failure
+                btnText.style.display = 'block';
+                loader.style.display = 'none';
+                loginBtn.style.pointerEvents = 'all';
+                
+                messageDisplay.style.color = "#ffa69e";
+                messageDisplay.innerText = "✕ Invalid Device ID. Please try again.";
+                
+                // Shake animation for error
+                const card = document.querySelector('.login-card');
+                card.style.animation = "shake 0.4s ease";
+                setTimeout(() => card.style.animation = "", 400);
+            }
+        }, 800); // Simulate network check
+    }
+
+    // Add CSS Shake Animation dynamically
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+    `;
+    document.head.appendChild(style);
+</script>
+
+</body>
+</html>

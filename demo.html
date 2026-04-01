@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AlertMate | Safety & Wellness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --coral: #FFA69E;
+      --cream: #FAF3DD;
+      --mint: #B8F2E6;
+      --sky: #27a088;
+      --slate: #5E6472;
+    }
+
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--cream);
+      color: var(--slate);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* --- Navigation Bar (Matching Image) --- */
+    header {
+      background: var(--sky);
+      color: #ffffff;
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 4px solid var(--coral);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.5px;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: var(--mint);
+    }
+
+    /* --- Main Content --- */
+    .container {
+      flex: 1; /* Pushes footer to bottom */
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .hero-text {
+      margin-bottom: 40px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    button {
+      width: 100%;
+      max-width: 350px;
+      padding: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      color: var(--slate);
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .alert-btn { background: var(--coral); }
+    .med-btn { background: var(--mint); }
+    .sos-btn { background: var(--slate); color: white; }
+
+    /* --- Feedback Areas --- */
+    .status {
+      margin: 30px 0;
+      font-size: 22px;
+      font-weight: 800;
+      min-height: 1.5em;
+      transition: color 0.3s;
+    }
+
+    .log-container {
+      background: white;
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      border-left: 6px solid var(--sky);
+    }
+
+    .log {
+      height: 120px;
+      overflow-y: auto;
+      text-align: left;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+    }
+
+    /* --- Footer --- */
+    footer {
+      background: var(--slate);
+      color: var(--cream);
+      padding: 30px 20px;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: var(--mint);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+      }
+      nav ul { gap: 15px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>AlertMate</h1>
+    <nav>
+      <ul>
+          <li><a href="why_choose_us.html">Features</a></li>
+        <li><a href="demo.html">Demo</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="howitworks.html">How it works?</a></li>
+    
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="hero-text">
+      <h2>Emergency Response Simulation</h2>
+      <p>Test the device functions using the triggers below.</p>
+    </div>
+
+    <div class="button-group">
+      <button class="alert-btn" onclick="triggerFall()">⚠️ Fall Alert</button>
+      <button class="med-btn" onclick="triggerMedication()">💊 Medicine Reminder</button>
+      <button class="sos-btn" onclick="triggerSOS()">🆘 Emergency SOS</button>
+    </div>
+
+    <div class="status" id="status">System Online</div>
+
+    <div class="log-container">
+      <div style="font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Activity Log</div>
+      <div class="log" id="log"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 AlertMate | Providing Peace of Mind | All Rights Reserved</p>
+    <p><a href="aboutus.html">About Our Mission</a></p>
+  </footer>
+
+  <script>
+    const statusEl = document.getElementById("status");
+    const logEl = document.getElementById("log");
+
+    function updateUI(text, color, logMsg) {
+      // Sound effect
+      const beep = new Audio("https://www.soundjay.com/buttons/beep-07.wav");
+      beep.play().catch(() => console.log("Audio requires user interaction"));
+
+      // Update Status
+      statusEl.innerText = text;
+      statusEl.style.color = color;
+
+      // Add to Log
+      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const entry = document.createElement("div");
+      entry.style.marginBottom = "5px";
+      entry.innerHTML = `<strong>[${time}]</strong> ${logMsg}`;
+      logEl.prepend(entry);
+    }
+
+    function triggerFall() {
+      updateUI("Fall Detected! Notifying Family...", "#d6685e", "Fall alert sensor triggered.");
+    }
+
+    function triggerMedication() {
+      updateUI("Time for your medication.", "#27a088", "Medication reminder notification sent.");
+    }
+
+    function triggerSOS() {
+      updateUI("SOS SENT! Emergency services called.", "#5E6472", "CRITICAL: Manual SOS button pressed.");
+    }
+  </script>
+
+</body>
+</html>

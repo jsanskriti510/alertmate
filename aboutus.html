@@ -10,54 +10,37 @@
         body {
             margin: 0;
             font-family: 'Segoe UI', Arial, sans-serif;
-            /* Using the Cream color for a warm background */
             background: #FAF3DD;
             color: #16443b;
             line-height: 1.6;
         }
 
-        /* Make the link fixed at the top-left corner */
-        .top-link {
-            position: fixed;
-            /* stays in place even when scrolling */
-            top: 10px;
-            /* distance from top */
-            right: 10px;
-            /* distance from left */
-            color: rgb(255, 255, 255);
-            /* link color */
-            text-decoration: none;
-            /* remove underline (optional) */
+        /* ✅ NEW TOP HEADER */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2f9e8f;
+            padding: 15px 40px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
             font-weight: bold;
-            /* optional styling */
-            background-color: #27a088;
-            /* optional: highlight link */
-            padding: 5px 10px;
-            /* optional padding */
-            border-radius: 5px;
-            /* optional rounded corners */
         }
 
-        header {
-            /* Using the Deep Slate for a professional header */
-            background: #27a088;
-            color: #ffffff;
-            text-align: center;
-            padding: 60px 20px;
-
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: 0.3s;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 40px;
-            letter-spacing: 1px;
-        }
-
-        header p {
-            margin-top: 10px;
-            font-size: 20px;
-            color: #AED9E0;
-            /* Soft blue for subtext */
+        .nav-links a:hover {
+            opacity: 0.7;
         }
 
         section {
@@ -71,25 +54,13 @@
             padding: 30px;
             margin: 20px 0;
             border-radius: 15px;
-            /* Subtle mint border for a clean look */
             border-left: 8px solid #B8F2E6;
             box-shadow: 0 4px 10px #ffa69e;
-
         }
 
         .card h2 {
-            /* Using the Slate color for headings */
             color: #5E6472;
             margin-top: 0;
-        }
-
-
-
-
-
-        .btn:hover {
-            background: #ff8e82;
-            transform: translateY(-2px);
         }
 
         ul {
@@ -103,7 +74,6 @@
             position: relative;
         }
 
-        /* Adding a little mint bullet point */
         li::before {
             content: "•";
             color: #B8F2E6;
@@ -126,10 +96,16 @@
 
 <body>
 
-    <header>
-        <h1>About AlertMate</h1>
-        <p>Your Safety. Our Priority.</p>
-        <a href="howitworks.html" class="top-link ">How it works?</a>
+    <!--  NEW HEADER -->
+    <header class="top-header">
+        <div class="logo">AlertMate</div>
+
+        <nav class="nav-links">
+            <a href="why_choose_us.html">Features</a>
+            <a href="demo.html">Demo</a>
+            <a href="contact.html">Contact</a>
+            <a href="howitworks.html">How it works?</a>
+        </nav>
     </header>
 
     <section>
@@ -163,6 +139,7 @@
                 utilizing cost-effective, high-quality components.
             </p>
         </div>
+
         <div class="card">
             <h2>What We Do?</h2>
             <p>

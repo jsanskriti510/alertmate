@@ -9,18 +9,55 @@
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Using FAF3DD (Cream) for a soft background */
             background: #FAF3DD;
             color: #333;
         }
 
+        /* --- NEW NAVIGATION STYLES --- */
+        .navbar {
+            background-color: #27a088;
+            /* Matching the teal in your image */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            color: white;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* --- EXISTING STYLES --- */
         header {
-            /* Using 5E6472 (Deep Slate) for the header */
             background: #27a088;
             color: white;
             text-align: center;
             padding: 40px 25px;
-           
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         section {
@@ -32,7 +69,6 @@
         h2 {
             text-align: center;
             margin-bottom: 40px;
-
             color: #27a088;
         }
 
@@ -46,8 +82,7 @@
             background: white;
             padding: 25px;
             border-radius: 15px;
-            /* Soft shadow using the slate color with low opacity */
-            box-shadow: 0 6px 15px #ffa69e;
+            box-shadow: 0 6px 15px rgba(255, 166, 158, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
             border-bottom: 4px solid transparent;
@@ -55,7 +90,6 @@
 
         .step-card:hover {
             transform: translateY(-8px);
-            /* Highlight border using your custom Teal #27a088 */
             border-bottom: 4px solid #27a088;
             box-shadow: 0 10px 20px rgba(94, 100, 114, 0.2);
         }
@@ -63,7 +97,6 @@
         .step-number {
             font-size: 28px;
             font-weight: bold;
-            /* Using your requested #27a088 */
             color: #27a088;
         }
 
@@ -88,13 +121,11 @@
         footer {
             text-align: center;
             padding: 25px;
-            /* Using 5E6472 for footer to match header */
             background: #5E6472;
             color: #FAF3DD;
             margin-top: 40px;
         }
 
-        /* Small decorative element using AED9E0 (Light Blue) */
         .step-card.active {
             background-color: #f9ffff;
         }
@@ -103,17 +134,25 @@
 
 <body>
 
+    <nav class="navbar">
+        <div class="logo">AlertMate</div>
+        <ul class="nav-links">
+            <li><a href="why_choose_us.html">Features</a></li>
+            <li><a href="demo.html">Demo</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="howitworks.html">How it works?</a></li>
+        </ul>
+        </ul>
+    </nav>
+
     <header>
         <h1>How AlertMate Works</h1>
         <p>Simple • Smart • Reliable Alert System</p>
-        
     </header>
 
     <section>
         <h2>Working Process</h2>
-
         <div class="steps">
-
             <div class="step-card">
                 <div class="step-number">1</div>
                 <div class="step-title">Device Activation</div>
@@ -138,8 +177,8 @@
             <div class="step-card">
                 <div class="step-number">4</div>
                 <div class="step-title">Validation</div>
-                <div class="step-desc">Sophisticated algorithms analyze the impact. If it's a false alarm (like dropping
-                    the device), it is ignored. If a real fall is confirmed, the alert sequence begins.</div>
+                <div class="step-desc">Sophisticated algorithms analyze the impact. If it's a false alarm, it is
+                    ignored. If a real fall is confirmed, the alert sequence begins.</div>
             </div>
 
             <div class="step-card">
@@ -148,18 +187,16 @@
                 <div class="step-desc">Once a fall is validated, an emergency signal is instantly sent to your emergency
                     contacts or caregivers with your location data.</div>
             </div>
-
         </div>
     </section>
 
     <footer>
-    <p style="color: #ffffff; opacity: 0.8;">© 2026 AlertMate | Providing Peace of Mind | All Rights Reserved </p>
-    <a href="aboutus.html" style="color:#ffffff;">About Us</a>
-  </footer>
+        <p style="color: #ffffff; opacity: 0.8;">© 2026 AlertMate | Providing Peace of Mind | All Rights Reserved </p>
+        <a href="aboutus.html" style="color:#ffffff;">About Us</a>
+    </footer>
 
     <script>
         const cards = document.querySelectorAll('.step-card');
-
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 card.classList.toggle('active');
