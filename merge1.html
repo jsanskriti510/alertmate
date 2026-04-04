@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlertMate | Pro Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* --- LOGIN STYLES --- */
+        :root {
+            --salmon: #ffa69e;
+            --cream: #faf3dd;
+            --mint: #aed9e0;
+            --teal: #27a088;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.85);
+            --border: rgba(39, 160, 136, 0.15);
+            /* Dashboard Colors Integration */
+            --primary-coral: #27a088;
+            --bg-cream: #FAF3DD;
+            --mint-dash: #B8F2E6;
+            --sky-blue: #AED9E0;
+            --dark-slate: #5E6472;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            background-color: var(--white);
+        }
+
+        #login-section {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .brand-panel {
+            flex: 0 0 35%;
+            position: relative;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            overflow: hidden;
+            border-right: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, var(--mint), var(--teal));
+            filter: blur(80px);
+            border-radius: 50%;
+            z-index: 1;
+            animation: move 20s infinite alternate;
+            opacity: 0.6;
+        }
+
+        .blob-2 {
+            bottom: -100px;
+            right: -100px;
+            background: var(--salmon);
+            animation-delay: -5s;
+        }
+
+        @keyframes move {
+            from {
+                transform: translate(-10%, -10%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(20%, 20%) rotate(20deg);
+            }
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 10;
+            text-align: left;
+        }
+
+        .brand-logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .brand-logo span {
+            color: var(--teal);
+        }
+
+        .dot {
+            color: var(--salmon);
+        }
+
+        .brand-tagline {
+            font-size: 1.1rem;
+            color: #4a4a4a;
+            font-weight: 500;
+            border-left: 3px solid var(--salmon);
+            padding-left: 15px;
+        }
+
+        .portal-panel {
+            flex: 0 0 65%;
+            background-color: #fdfdfd;
+            background-image: radial-gradient(var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .login-card {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 32px;
+            width: 100%;
+            max-width: 460px;
+            box-shadow: 0 40px 80px rgba(246, 157, 148, 0.5);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            position: relative;
+            z-index: 5;
+        }
+
+        .login-card h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .subtitle {
+            color: #8892b0;
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 22px;
+            background: #f9fafb;
+            border: 2px solid #edf2f7;
+            border-radius: 18px;
+            font-size: 1.1rem;
+            outline: none;
+        }
+
+        .input-label {
+            position: absolute;
+            left: 20px;
+            top: -10px;
+            background: var(--white);
+            padding: 0 10px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--teal);
+            text-transform: uppercase;
+        }
+
+        .btn-verify {
+            width: 100%;
+            padding: 20px;
+            background: #1a1a1a;
+            color: var(--white);
+            border: none;
+            border-radius: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* --- DASHBOARD STYLES (HIDDEN INITIALLY) --- */
+        #dashboard-section {
+            display: none;
+            background: var(--bg-cream);
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--primary-coral);
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px #ffa69e;
+            text-align: center;
+            border-top: 5px solid var(--sky-blue);
+        }
+
+        .value {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--dark-slate);
+        }
+
+        .btn-dash {
+            margin-top: 15px;
+            padding: 12px 20px;
+            background: var(--mint-dash);
+            color: var(--dark-slate);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .dash-input {
+            padding: 10px;
+            margin-top: 10px;
+            width: 85%;
+            border: 2px solid var(--sky-blue);
+            border-radius: 6px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--dark-slate);
+            color: var(--bg-cream);
+            margin-top: 40px;
+        }
+
+        .locked {
+            background: #efefef;
+            opacity: 0.8;
+            border-top: 5px solid #ccc;
+        }
+
+        @media (max-width: 1000px) {
+            #login-section {
+                flex-direction: column;
+                overflow-y: auto;
+            }
+
+            .brand-panel {
+                height: 30vh;
+                flex: none;
+                width: 100%;
+            }
+
+            .portal-panel {
+                flex: none;
+                width: 100%;
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="login-section">
+        <div class="brand-panel">
+            <div class="blob"></div>
+            <div class="blob blob-2"></div>
+            <div class="brand-content">
+                <h1 class="brand-logo">Alert<span>Mate</span><span class="dot">.</span></h1>
+                <p class="brand-tagline">Real-time monitoring <br> Watching over what matters most</p>
+            </div>
+        </div>
+
+        <div class="portal-panel">
+            <div class="login-card">
+                <h2>Sign In</h2>
+                <p class="subtitle">Connect your device.</p>
+
+                <div class="input-container">
+                    <span class="input-label">Enter Device ID</span>
+                    <input type="password" id="passKey" class="login-input" placeholder="Enter Device ID"
+                        autocomplete="off">
+                </div>
+
+                <button class="btn-verify" onclick="handleAuth()">
+                    Authorize & Sync
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                <div id="status-msg"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dashboard-section">
+        <header>
+            <div class="logo-area">
+                <h1>AlertMate</h1>
+                <p>Soft, Secure, Real-Time Monitoring</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="why_choose_us.html">Features</a></li>
+                    <li><a href="demo.html">Demo</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="howitworks.html">How it works?</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="dashboard">
+            <div class="card" style="border-top-color: var(--primary-coral);">
+                <h2>No. of Falls</h2>
+                <div class="value" id="falls">0</div>
+            </div>
+
+            <div class="card">
+                <h2>Medicine Alarm</h2>
+                <input type="time" id="alarmTime" class="dash-input">
+                <br>
+                <button class="btn-dash" onclick="setAlarm()">Set Alarm</button>
+                <p id="alarmStatus" style="font-size: 0.9rem; margin-top: 10px;"></p>
+            </div>
+
+            <div class="card">
+                <h2>Missed (Month)</h2>
+                <div class="value" id="missed">0</div>
+                <button class="btn-dash" onclick="missMedicine()">Log Missed</button>
+            </div>
+
+            <div class="card locked">
+                <h2>Heartbeat</h2>
+                <div class="value">-- bpm</div>
+                <p>Future Device Feature</p>
+            </div>
+        </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+        <footer>
+            <p>© 2026 AlertMate | Providing Peace of Mind | All Rights Reserved</p>
+            <a href="#" style="color:#ffffff;">About Us</a>
+        </footer>
+    </section>
+
+    <script>
+        /* --- AUTH LOGIC --- */
+        function handleAuth() {
+            const input = document.getElementById('passKey');
+            const status = document.getElementById('status-msg');
+            const btn = document.querySelector('.btn-verify');
+
+            if (input.value === "12345") {
+                status.style.color = "var(--teal)";
+                status.innerHTML = "✓ Handshake Successful. Synching hardware...";
+                btn.style.background = "var(--teal)";
+                btn.innerHTML = "Opening Dashboard...";
+                btn.disabled = true;
+
+                // Switch View instead of redirecting
+                setTimeout(() => {
+                    document.getElementById('login-section').style.display = 'none';
+                    document.getElementById('dashboard-section').style.display = 'block';
+                }, 1200);
+            } else {
+                status.style.color = "var(--salmon)";
+                status.innerHTML = "✕ Authentication Error. Invalid Signature.";
+                input.style.borderColor = "var(--salmon)";
+
+                const card = document.querySelector('.login-card');
+                card.animate([
+                    { transform: 'translateX(0px)' },
+                    { transform: 'translateX(-10px)' },
+                    { transform: 'translateX(10px)' },
+                    { transform: 'translateX(0px)' }
+                ], { duration: 300 });
+
+                setTimeout(() => { input.style.borderColor = "#edf2f7"; }, 2000);
+            }
+        }
+
+        /* --- DASHBOARD LOGIC --- */
+        let fallCount = 0;
+        function increaseFalls() {
+            fallCount++;
+            document.getElementById("falls").innerText = fallCount;
+        }
+
+        let missedCount = 0;
+        function missMedicine() {
+            missedCount++;
+            document.getElementById("missed").innerText = missedCount;
+        }
+
+        function setAlarm() {
+            let alarmTime = document.getElementById("alarmTime").value;
+            if (!alarmTime) return alert("Please select a time!");
+            document.getElementById("alarmStatus").innerText = "🔔 Active for " + alarmTime;
+
+            setInterval(() => {
+                let now = new Date();
+                let currentTime = now.getHours().toString().padStart(2, '0') + ":" +
+                    now.getMinutes().toString().padStart(2, '0');
+                if (currentTime === alarmTime) {
+                    alert("Time to take your medicine!");
+                }
+            }, 60000);
+        }
+    </script>
+</body>
+
+</html>
