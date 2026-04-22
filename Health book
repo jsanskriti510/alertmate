@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Log Book - AlertMate</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #FAF3DD;
+    color: #16443b;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2f9e8f;
+    padding: 15px 40px;
+}
+
+.logo {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+section {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 15px;
+    border-left: 8px solid #B8F2E6;
+    box-shadow: 0 4px 10px #ffa69e;
+}
+
+h2 {
+    text-align: center;
+    color: #5E6472;
+}
+
+.reading {
+    margin-top: 15px;
+    padding: 12px;
+    background: #FAF3DD;
+    border-radius: 10px;
+}
+
+.reading h3 {
+    color: #2f9e8f;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #5E6472;
+    color: #AED9E0;
+}
+</style>
+</head>
+
+<body>
+
+<header class="top-header">
+    <div class="logo">AlertMate</div>
+</header>
+
+<section>
+
+<div class="card">
+    <h2>Health Log Book</h2>
+
+    <div id="readings"></div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 AlertMate | Health Monitoring System
+</footer>
+
+<script>
+
+// REALISTIC READINGS (IN FORMAT YOU WANT)
+const data = [
+{hr: 92, spo2: 96, temp: 99, bp: "120/72"},
+{hr: 88, spo2: 95, temp: 98.6, bp: "118/70"},
+{hr: 90, spo2: 96, temp: 99.2, bp: "122/74"},
+{hr: 94, spo2: 94, temp: 100, bp: "130/80"},
+{hr: 89, spo2: 96, temp: 98.8, bp: "119/72"},
+{hr: 96, spo2: 93, temp: 100.5, bp: "135/85"},
+{hr: 87, spo2: 97, temp: 98.4, bp: "117/70"},
+{hr: 91, spo2: 95, temp: 99.1, bp: "121/73"},
+{hr: 93, spo2: 94, temp: 100.2, bp: "128/78"},
+{hr: 92, spo2: 96, temp: 99, bp: "120/72"}
+];
+
+const container = document.getElementById("readings");
+
+// DISPLAY READINGS
+data.forEach((d, i) => {
+    container.innerHTML += `
+    <div class="reading">
+        <h3>Reading ${i+1}</h3>
+        ❤️ Heart Rate: <b>${d.hr} bpm</b><br>
+        🩸 SpO₂: <b>${d.spo2}%</b><br>
+        🌡 Temperature: <b>${d.temp} °F</b><br>
+        🩺 Blood Pressure: <b>${d.bp} mmHg</b>
+    </div>
+    `;
+});
+
+</script>
+
+</body>
+</html>
