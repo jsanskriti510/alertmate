@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlertMate - Health Record</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #FAF3DD;
+            color: #16443b;
+        }
+
+        /* HEADER */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2f9e8f;
+            padding: 15px 40px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 18px;
+        }
+
+        /* SECTION */
+        section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-left: 8px solid #B8F2E6;
+            box-shadow: 0 4px 10px #ffa69e;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #5E6472;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #AED9E0;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2f9e8f;
+            box-shadow: 0 0 5px rgba(47,158,143,0.5);
+        }
+
+        textarea {
+            height: 60px;
+            resize: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background: #2f9e8f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #247a70;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #5E6472;
+            color: #AED9E0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="top-header">
+        <div class="logo">AlertMate</div>
+
+        <nav class="nav-links">
+            <a href="#">Features</a>
+            <a href="#">Demo</a>
+            <a href="#">Contact</a>
+            <a href="#">How it works?</a>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <section>
+
+        <div class="card">
+            <h2>Patient Health Record</h2>
+
+            <form>
+
+                <label>Full Name</label>
+                <input type="text" value="Rajesh Kumar">
+
+                <label>Gender</label>
+                <select>
+                    <option selected>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+
+                <label>Age</label>
+                <select id="age"></select>
+
+                <label>Date of Birth</label>
+                <input type="date" value="1975-08-15">
+
+                <label>Height (cm)</label>
+                <select id="height"></select>
+
+                <label>Weight (kg)</label>
+                <select id="weight"></select>
+
+                <label>Medical Conditions</label>
+                <textarea>Diabetes (Sugar), High Blood Pressure</textarea>
+
+                <label>Allergies</label>
+                <textarea>Dust Allergy</textarea>
+
+                <label>Medicines not suitable</label>
+                <textarea>Penicillin</textarea>
+
+                <label>Past Surgeries</label>
+                <textarea>Appendix surgery (2010)</textarea>
+
+                <label>Upload Medical Reports</label>
+                <input type="file">
+
+                <button type="submit">Update Data</button>
+
+            </form>
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        © 2026 AlertMate | Providing Peace of Mind
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        // Age
+        for (let i = 1; i <= 120; i++) {
+            let option = document.createElement("option");
+            option.text = i;
+            if (i === 50) option.selected = true;
+            document.getElementById("age").add(option);
+        }
+
+        // Height
+        for (let i = 100; i <= 220; i++) {
+            let option = document.createElement("option");
+            option.text = i;
+            if (i === 170) option.selected = true;
+            document.getElementById("height").add(option);
+        }
+
+        // Weight
+        for (let i = 30; i <= 150; i++) {
+            let option = document.createElement("option");
+            option.text = i;
+            if (i === 72) option.selected = true;
+            document.getElementById("weight").add(option);
+        }
+    </script>
+
+</body>
+</html>
