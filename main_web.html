@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlertMate — Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --coral:     #FFA69E;
+            --coral-dim: rgba(255,166,158,0.18);
+            --cream:     #FAF3DD;
+            --mint:      #B8F2E6;
+            --mint-dim:  rgba(184,242,230,0.25);
+            --sky:       #AED9E0;
+            --sky-dim:   rgba(174,217,224,0.22);
+            --slate:     #5E6472;
+            --bg:        #F6F0E8;
+            --surface:   #FEFCF7;
+            --surface2:  #F0EBE0;
+            --border:    rgba(94,100,114,0.15);
+            --text:      #2E3240;
+            --muted:     #8A8F9E;
+            --card-shadow: 0 2px 20px rgba(94,100,114,0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(184,242,230,0.3) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(174,217,224,0.25) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255,166,158,0.08) 0%, transparent 60%);
+        }
+
+        /* ── Header ── */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2.5rem;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 1px 12px rgba(94,100,114,0.08);
+        }
+
+        .logo { display: flex; align-items: center; gap: 10px; }
+
+        .logo-mark {
+            width: 36px; height: 36px;
+            background: var(--coral);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem; color: var(--text); font-weight: 600;
+        }
+
+        .logo-sub { font-size: 0.72rem; color: var(--muted); font-weight: 300; margin-left: 2px; }
+
+        .header-right { display: flex; align-items: center; gap: 8px; }
+
+        .status-chip {
+            display: flex; align-items: center; gap: 7px;
+            font-size: 0.75rem; color: var(--muted);
+            background: var(--surface2);
+            padding: 6px 14px; border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .status-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #5CC8A8;
+            box-shadow: 0 0 6px #5CC8A8;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+        /* ── Hero ── */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            text-align: center;
+            gap: 0;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--muted);
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            animation: fadeUp 0.6s ease 0.1s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 600;
+            line-height: 1.1;
+            color: var(--text);
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            animation: fadeUp 0.6s ease 0.2s forwards;
+        }
+
+        .hero-title span {
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--coral);
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--muted);
+            font-weight: 300;
+            max-width: 440px;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeUp 0.6s ease 0.3s forwards;
+        }
+
+        /* ── Cards ── */
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 680px;
+            width: 100%;
+            opacity: 0;
+            animation: fadeUp 0.6s ease 0.4s forwards;
+        }
+
+        .portal-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            border-radius: 20px 20px 0 0;
+            transition: height 0.3s ease;
+        }
+
+        .card-dashboard::before { background: var(--sky); }
+        .card-hospital::before  { background: var(--coral); }
+
+        .portal-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(94,100,114,0.16);
+        }
+
+        .card-dashboard:hover { border-color: rgba(174,217,224,0.6); }
+        .card-hospital:hover  { border-color: rgba(255,166,158,0.6); }
+
+        .card-icon {
+            width: 52px; height: 52px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .card-dashboard .card-icon { background: var(--sky-dim); }
+        .card-hospital  .card-icon { background: var(--coral-dim); }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .card-desc {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .card-features {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .feature-tag {
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--slate);
+        }
+
+        .feature-dot {
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .card-dashboard .feature-dot { background: var(--sky); }
+        .card-hospital  .feature-dot { background: var(--coral); }
+
+        .card-arrow {
+            margin-top: auto;
+            font-size: 0.78rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s ease;
+        }
+
+        .card-dashboard .card-arrow { color: #4A7F88; }
+        .card-hospital  .card-arrow { color: #C45B55; }
+
+        .portal-card:hover .card-arrow { gap: 10px; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.72rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .cards { grid-template-columns: 1fr; max-width: 360px; }
+            header { padding: 0 1.2rem; }
+            .hero { padding: 2rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-mark">💊</div>
+        <div>
+            <div class="logo-text">AlertMate</div>
+            <div class="logo-sub">IoT Patient Monitoring</div>
+        </div>
+    </div>
+    <div class="header-right">
+        <div class="status-chip">
+            <div class="status-dot"></div>
+            <span>System Online</span>
+        </div>
+    </div>
+</header>
+
+<main class="hero">
+    <div class="hero-eyebrow">Welcome to AlertMate</div>
+    <h1 class="hero-title">Patient care,<br><span>always on.</span></h1>
+    <p class="hero-sub">Real-time IoT monitoring for 500+ devices. Choose your portal to get started.</p>
+
+    <div class="cards">
+        <!-- Dashboard -->
+        <a class="portal-card card-dashboard" href="/dashboard">
+            <div class="card-icon">📊</div>
+            <div class="card-title">Dashboard</div>
+            <div class="card-desc">Monitor all devices, vitals, and alerts in real time.</div>
+            <div class="card-features">
+                <div class="feature-tag"><span class="feature-dot"></span> Live device status</div>
+                <div class="feature-tag"><span class="feature-dot"></span> Vitals & GPS tracking</div>
+                <div class="feature-tag"><span class="feature-dot"></span> Alert history</div>
+            </div>
+            <div class="card-arrow">Open Dashboard →</div>
+        </a>
+
+        <!-- Hospital Portal -->
+        <a class="portal-card card-hospital" href="/hospital">
+            <div class="card-icon">🏥</div>
+            <div class="card-title">Hospital Portal</div>
+            <div class="card-desc">Receive and manage caregiver reports in real time.</div>
+            <div class="card-features">
+                <div class="feature-tag"><span class="feature-dot"></span> Live report queue</div>
+                <div class="feature-tag"><span class="feature-dot"></span> Acknowledge & resolve</div>
+                <div class="feature-tag"><span class="feature-dot"></span> WebSocket updates</div>
+            </div>
+            <div class="card-arrow">Open Portal →</div>
+        </a>
+    </div>
+</main>
+
+<footer>
+    AlertMate v4.0 · Backend running on <strong>localhost:8000</strong>
+</footer>
+
+</body>
+</html>
