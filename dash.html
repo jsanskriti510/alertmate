@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlertMate — Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#27a088;--mint:#B8F2E6;--sky:#AED9E0;--sky-dim:rgba(174,217,224,.22);
+  --slate:#5E6472;--bg:#FAF3DD;--surface:white;
+  --border:rgba(94,100,114,.15);--text:#2E3240;--muted:#8A8F9E;
+  --shadow:0 4px 15px rgba(94,100,114,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+header{background:var(--teal);color:white;padding:0 2.5rem;height:68px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.1);flex-shrink:0}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-mark{width:36px;height:36px;background:rgba(255,255,255,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem}
+.logo-text{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:600}
+.logo-sub{font-size:.72rem;opacity:.8}
+nav{display:flex;gap:8px;align-items:center}
+.nav-btn{padding:7px 16px;border-radius:9px;border:1px solid rgba(255,255,255,.35);background:none;color:white;font-size:.8rem;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.nav-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.7)}
+main{flex:1;width:100%;max-width:1100px;margin:0 auto;padding:40px 20px}
+.dashboard{display:grid;grid-template-columns:repeat(2,1fr);gap:25px}
+.card{background:white;padding:2rem;border-radius:15px;box-shadow:var(--shadow);text-align:center;border-top:6px solid var(--sky);display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:220px;transition:transform .3s}
+.card:hover{transform:translateY(-5px)}
+.card h2{margin:0 0 1rem;font-size:1.1rem;text-transform:uppercase;letter-spacing:1px;color:var(--slate)}
+.value{font-size:3.5rem;font-weight:800;margin:10px 0;font-family:'Playfair Display',serif}
+input[type="time"]{padding:10px;border:2px solid var(--sky);border-radius:8px;width:70%;margin-bottom:10px;font-family:'DM Sans',sans-serif;color:var(--text)}
+.btn{padding:12px 25px;background:var(--mint);color:var(--slate);border:none;border-radius:8px;cursor:pointer;font-weight:600;transition:background .3s;font-family:'DM Sans',sans-serif;font-size:.9rem}
+.btn:hover{background:#a2ded1}
+.btn-danger{background:#ffd6d6;color:#a33}
+.btn-danger:hover{background:#ffbdbd}
+.locked{background:#f7f7f7;border-top-color:#d1d1d1;opacity:.65}
+.status-text{font-size:.8rem;margin-top:10px;color:var(--teal)}
+@keyframes kpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.2);opacity:.7}}
+.tracking-active{display:inline-block;animation:kpulse 1.5s infinite}
+footer{background:var(--slate);color:white;text-align:center;padding:1.5rem;font-size:.85rem;flex-shrink:0}
+footer a{color:var(--sky);text-decoration:none;margin:0 8px}
+.toast-container{position:fixed;top:80px;right:20px;z-index:999;display:flex;flex-direction:column;gap:8px}
+.toast{padding:12px 18px;border-radius:12px;font-size:.82rem;font-weight:500;border-left:4px solid;background:white;box-shadow:0 4px 20px rgba(94,100,114,.2);max-width:300px;color:var(--text);animation:slide-in .3s ease}
+.toast-info{border-color:var(--sky)}.toast-success{border-color:var(--mint)}.toast-critical{border-color:#FFA69E}
+@keyframes slide-in{from{transform:translateX(100px);opacity:0}to{transform:translateX(0);opacity:1}}
+.missed-history{margin-top:12px;width:100%;max-height:110px;overflow-y:auto;font-size:.75rem;text-align:left;border-top:1px solid var(--border);padding-top:8px}
+.missed-history-row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--border)}
+@media(max-width:768px){.dashboard{grid-template-columns:1fr}header{padding:0 1rem;flex-direction:column;height:auto;padding:1rem;gap:10px}nav{flex-wrap:wrap;justify-content:center}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="goHome()">
+    <div class="logo-mark">📊</div>
+    <div>
+      <div class="logo-text">AlertMate</div>
+      <div class="logo-sub">Patient Dashboard</div>
+    </div>
+  </div>
+  <nav>
+    <button class="nav-btn" onclick="goHospital()">Hospital Portal</button>
+    <button class="nav-btn" onclick="goHome()">← Home</button>
+    <button class="nav-btn" onclick="doLogout()">Logout</button>
+  </nav>
+</header>
+
+<main>
+  <div class="dashboard">
+
+    <!-- Falls -->
+    <div class="card" style="border-top-color:var(--teal)">
+      <h2>No. of Falls</h2>
+      <div class="value" id="falls">—</div>
+    </div>
+
+    <!-- Medicine Alarm -->
+    <div class="card">
+      <h2>Medicine Alarm</h2>
+      <input type="time" id="alarmTime">
+      <button class="btn" onclick="setAlarm()">Set Alarm</button>
+      <p class="status-text" id="alarmStatus"></p>
+    </div>
+
+    <!-- Missed Medicine (with reset + history) -->
+    <div class="card" id="missedCard">
+      <h2>Missed (Month)</h2>
+      <div class="value" id="missed">0</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+        <button class="btn" onclick="missMedicine()">Log Missed</button>
+        <button class="btn btn-danger" onclick="resetMissed()">Reset</button>
+      </div>
+      <p id="missedMeta" style="margin-top:8px;font-size:.75rem;color:var(--muted)"></p>
+      <div class="missed-history" id="missedHistory"></div>
+    </div>
+
+    <!-- Medical Report -->
+    <div class="card" style="border-top-color:var(--teal)">
+      <h2>Medical Report</h2>
+      <div style="font-size:2.5rem;margin:5px 0">📋</div>
+      <button class="btn" onclick="goReports()">View Report</button>
+    </div>
+
+    <!-- GPS Tracker -->
+    <div class="card" style="border-top-color:var(--sky)">
+      <h2>GPS Tracker</h2>
+      <div id="gps-icon" style="font-size:2.5rem;margin:5px 0">📍</div>
+      <button class="btn" onclick="openTracker()">Track Live</button>
+      <p class="status-text" id="gpsStatus"></p>
+    </div>
+
+    <!-- Heartbeat (locked) -->
+    <div class="card locked">
+      <h2>Heartbeat</h2>
+      <div class="value" style="color:#bbb">--</div>
+      <p style="font-size:.8rem;color:var(--muted)">Feature Coming Soon</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 AlertMate | All Rights Reserved</p>
+  <div style="margin-top:8px">
+    <a href="#">About Us</a><a href="#">Help</a><a href="#">Privacy Policy</a>
+  </div>
+</footer>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+  // ── Token bootstrap ─────────────────────────────────
+  const urlToken = new URLSearchParams(window.location.search).get("token");
+  if (urlToken) {
+    localStorage.setItem("am_token", urlToken);
+    history.replaceState({}, "", "/dashboard");
+  }
+  const token = localStorage.getItem("am_token");
+  if (!token) window.location.href = "/";
+
+  // ── Navigation helpers ──────────────────────────────
+  function goHome()     { window.location.href = `/home?token=${token}`; }
+  function goHospital() { window.location.href = `/hospital?token=${token}`; }
+  function goReports()  { window.location.href = `/reports-page?token=${token}`; }
+  function doLogout()   { localStorage.removeItem("am_token"); window.location.href = "/"; }
+
+  // ── Falls counter ───────────────────────────────────
+  async function loadFalls() {
+    try {
+      const res = await fetch("/alerts/?type=fall", {
+        headers: { "Authorization": `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error(res.status);
+      const data = await res.json();
+      document.getElementById("falls").innerText = data.total ?? data.count ?? 0;
+    } catch {
+      document.getElementById("falls").innerText = "—";
+    }
+  }
+
+  // ── Missed medicine ─────────────────────────────────
+  const userSub = JSON.parse(atob(token.split('.')[1])).sub;
+
+  function getMissedData() {
+    const raw = localStorage.getItem(`missed2_${userSub}`);
+    if (raw) return JSON.parse(raw);
+    // Migrate legacy counter if present
+    const legacy = parseInt(localStorage.getItem(`missed_${userSub}`) || "0");
+    return { count: legacy, lastReset: new Date().toISOString(), history: [] };
+  }
+
+  function saveMissedData(data) {
+    localStorage.setItem(`missed2_${userSub}`, JSON.stringify(data));
+  }
+
+  function autoReset(data) {
+    const now = new Date();
+    const last = new Date(data.lastReset);
+    // Auto-reset on new calendar month
+    if (now.getFullYear() !== last.getFullYear() || now.getMonth() !== last.getMonth()) {
+      data.history.unshift({
+        label: last.toLocaleString('default', { month: 'long', year: 'numeric' }),
+        count: data.count,
+        resetAt: now.toISOString()
+      });
+      data.count = 0;
+      data.lastReset = now.toISOString();
+      saveMissedData(data);
+      toast("Auto-reset: new month started", "info");
+    }
+    return data;
+  }
+
+  function renderMissed() {
+    let data = getMissedData();
+    data = autoReset(data);
+
+    document.getElementById("missed").innerText = data.count;
+
+    const last = new Date(data.lastReset);
+    document.getElementById("missedMeta").innerText =
+      `Reset on ${last.toLocaleDateString()} · ${last.toLocaleString('default', { month: 'long' })}`;
+
+    const histEl = document.getElementById("missedHistory");
+    if (data.history.length === 0) {
+      histEl.innerHTML = `<span style="color:var(--muted)">No history yet</span>`;
+    } else {
+      histEl.innerHTML = data.history.map(h =>
+        `<div class="missed-history-row">
+          <span style="color:var(--slate)">${h.label}</span>
+          <strong>${h.count} missed</strong>
+        </div>`
+      ).join("");
+    }
+  }
+
+  function missMedicine() {
+    const data = getMissedData();
+    data.count++;
+    saveMissedData(data);
+    renderMissed();
+    toast("Missed dose logged", "info");
+  }
+
+  function resetMissed() {
+    if (!confirm("Reset missed count for this month? The current count will be saved to history.")) return;
+    const data = getMissedData();
+    data.history.unshift({
+      label: new Date(data.lastReset).toLocaleString('default', { month: 'long', year: 'numeric' }) + " (manual)",
+      count: data.count,
+      resetAt: new Date().toISOString()
+    });
+    data.count = 0;
+    data.lastReset = new Date().toISOString();
+    saveMissedData(data);
+    renderMissed();
+    toast("Count reset. History saved.", "success");
+  }
+
+  // ── Alarm ───────────────────────────────────────────
+  let alarmInterval = null;
+
+  function setAlarm() {
+    const alarmTime = document.getElementById("alarmTime").value;
+    if (!alarmTime) { toast("Please select a time first.", "info"); return; }
+    localStorage.setItem("alarm", alarmTime);
+    document.getElementById("alarmStatus").innerText = "🔔 Active for " + alarmTime;
+    toast("Alarm set for " + alarmTime, "success");
+    if (alarmInterval) clearInterval(alarmInterval);
+    alarmInterval = setInterval(() => {
+      const now = new Date();
+      const hhmm = String(now.getHours()).padStart(2,"0") + ":" + String(now.getMinutes()).padStart(2,"0");
+      if (hhmm === alarmTime) alert("💊 Medicine Time! Please take your medication.");
+    }, 30000);
+  }
+
+  // Restore saved alarm on load
+  const savedAlarm = localStorage.getItem("alarm");
+  if (savedAlarm) {
+    document.getElementById("alarmTime").value = savedAlarm;
+    document.getElementById("alarmStatus").innerText = "🔔 Active for " + savedAlarm;
+  }
+
+  // ── GPS Tracker ─────────────────────────────────────
+  function openTracker() {
+    const gpsStatus = document.getElementById("gpsStatus");
+    const gpsIcon = document.getElementById("gps-icon");
+    if (!navigator.geolocation) { gpsStatus.innerText = "❌ Geolocation not supported."; return; }
+    gpsStatus.innerText = "🛰️ Requesting location...";
+    gpsIcon.classList.add("tracking-active");
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const { latitude: lat, longitude: lng } = pos.coords;
+        gpsStatus.innerText = "✅ Found! Opening maps...";
+        setTimeout(() => {
+          window.open(`https://www.google.com/maps?q=${lat},${lng}`, "_blank");
+          gpsStatus.innerText = "📍 Tracking in new window.";
+          gpsIcon.classList.remove("tracking-active");
+        }, 800);
+      },
+      err => {
+        gpsIcon.classList.remove("tracking-active");
+        const msgs = {1:"❌ Permission denied.",2:"❌ Location unavailable.",3:"❌ Timed out."};
+        gpsStatus.innerText = msgs[err.code] || "❌ Unknown error.";
+      },
+      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+    );
+  }
+
+  // ── WebSocket (non-fatal) ───────────────────────────
+  try {
+    const ws = new WebSocket(`ws://localhost:8000/reports/ws`);
+    ws.onmessage = e => {
+      const data = JSON.parse(e.data);
+      if (data.event === "new_report" && data.report.urgency === "critical") {
+        document.body.style.outline = "4px solid red";
+        setTimeout(() => document.body.style.outline = "", 2000);
+        toast("🚨 Critical alert received!", "critical");
+      }
+    };
+    ws.onerror = () => {};
+  } catch {}
+
+  // ── Toast helper ────────────────────────────────────
+  function toast(msg, type = "info") {
+    const c = document.getElementById("toastContainer");
+    const t = document.createElement("div");
+    t.className = `toast toast-${type}`;
+    t.textContent = msg;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 4000);
+  }
+
+  // ── Init ────────────────────────────────────────────
+  loadFalls();
+  renderMissed();
+  setInterval(loadFalls, 30000);
+</script>
+</body>
+</html>
